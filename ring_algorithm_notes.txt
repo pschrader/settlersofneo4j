@@ -1,0 +1,40 @@
+Ring Algorithm for creating a settlers board.
+
+1. The Ring Algorithm starts with a central node.  Node 0 in ring 0. The following steps describe how to add the first ring, leaving you with a central hex node, linked to 6 surrounding hex nodes. A settlers board for 4 is just this. A central node linked to 2 surrounding rings of nodes.  (Might add a third to represent the water to make the representation more generalizeable.)
+
+2. Create 6 new nodes with property {ring:1}. Store references to them in a python list [0,1,2,3,4,5].
+
+3. Connect each node to its next neighbor in the list: 
+(0)-[:adjacent_to]->(1)
+(1)-[:adjacent_to]->(2)
+Etc.
+
+If the node reference is the last in the series, connect it to the first node. 
+list[-1]-[:adjacent_to]->list[0].
+
+4. Not connect each node in ring 1 to the original, central node. 
+
+5. Create 12 new nodes with the property {ring:2}. 
+
+6. Connect each node to its neighbor in the list.  (step 3). 
+
+7. For each element in the ring's list, add the index position of the previous element to its index position.  Then connect it to the element with the resulting index position, along with the next two.  
+
+You now have the land tiles for a settlers board for 4 people.  (Looking out to third ring tells me that my recipe in step 7 is not generalizeable.  But I should build out this much. There's probably some really elegant solution in here.  Feeling those out in notes below.
+
+Maybe there are three types of nodes.
+
+Interior (connect to 6). Every node in ring + 1.
+Corner (connect to 3). Ring neighbors plus inner ring index pos / 2.
+Side (connect to 4).  Inner ring index pos / 2 (no remainder)  + 1.
+
+A node will always connect to its ring neighbors (step 3).
+
+If you are not the outermost ring, then all of your nodes are inner nodes.  
+
+
+
+
+
+
+
